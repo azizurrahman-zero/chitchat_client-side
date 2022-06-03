@@ -1,9 +1,13 @@
 import React from "react";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 import loginBanner from "../../photos/login_banner.svg";
 import { BsFacebook, BsApple } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+  const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+  console.log(user);
   return (
     <div className="flex h-screen items-center">
       <div className="w-2/4 h-screen bg-zinc-50 pr-14 pl-24 flex items-center">
@@ -22,7 +26,10 @@ const Login = () => {
             <BsFacebook className="text-2xl" />
             <span className="pl-2">Continue with Facebook</span>
           </button>
-          <button className="btn btn-block btn-ghost shadow-lg mb-5">
+          <button
+            className="btn btn-block btn-ghost shadow-lg mb-5"
+            onClick={() => signInWithGoogle()}
+          >
             <FcGoogle className="text-2xl" />
             <span className="pl-2">Continue with Google</span>
           </button>
